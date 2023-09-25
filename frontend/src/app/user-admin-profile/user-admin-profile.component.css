@@ -1,0 +1,46 @@
+ 
+   .form-select {
+    width: 80%;
+  } 
+  
+  /*  selected All  */
+  .list-info {
+    /* font-family: "Montserrat"; */
+    color: #919191;
+    line-height: 1.6;
+    font-weight: 900;
+  
+  }
+
+  h2,h3{
+    color: rgb(0, 0, 0);
+  }
+
+  .users-admins {
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    max-width: 900px;    margin: 0 auto;  
+  }
+
+  label{
+    color: rgba(0, 0, 0, 0.855)
+  }
+
+
+  .list-group-item{
+    background: linear-gradient(90deg, #f4f4f45e 0%, #243b55 100%);
+  }
+
+  .error-message {
+    color: rgba(167, 0, 0, 0.793);
+    font-size: 14px;
+    margin-top: 5px;
+    font-weight: 900;
+  }
+button{
+margin-left: 2px;
+margin-right: 2px;
+margin-bottom: 10px;
+
+}

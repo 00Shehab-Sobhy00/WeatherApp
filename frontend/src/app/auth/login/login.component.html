@@ -1,0 +1,44 @@
+
+ <div class="login-box">
+  <h2>Login</h2>
+  <!-- [routerLink]="['user/' , userId,'/details']" -->
+
+  <div *ngIf="invValidLogin" class="error-message" > Invalid Email or Password </div>
+<!-- 
+  user/profile/{userId} -->
+  <form [formGroup]=" signupForm"  (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input formControlName="email" style="color: rgb(21, 21, 21);" type="text" id="email" class="form-control" />
+      <div *ngIf="Email.invalid && (Email.dirty || Email.touched)" class="error-message">
+        <div *ngIf="Email.errors?.required">Email is required</div>
+        <div *ngIf="Email.errors?.email">Invalid email format</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password" >Password</label>
+      <input formControlName="password" style="color: rgb(18, 18, 18);" type="password" id="password" class="form-control" />
+      <div *ngIf="Password.invalid && (Password.dirty || Password.touched)" class="error-message">
+        <div *ngIf="Password.errors?.required">Password is required</div>
+        <!-- <div *ngIf="Password.errors?.atLeastOneNumber">Password must contain at least one number</div>
+        <div *ngIf="Password.errors?.hasCapitalCase">Password must contain at least one capital letter</div>
+        <div *ngIf="Password.errors?.minLength">Password must be at least 8 characters long</div>
+        <div *ngIf="Password.errors?.maxLength">Password must be at most 20 characters long</div>
+        <div *ngIf="Password.errors?.containSpace">Password cannot contain spaces</div> -->
+      </div>
+    </div>
+    <div class="button-container">
+      <button id="submit" class="submit-button" routerLink="/sign-up" >Sign Up</button>
+      <button id="submit" class="submit-button" [disabled]="!signupForm.valid"  >Submit</button>
+  
+
+    </div>
+  </form>
+</div>
+
+
+ 
+ 
+  
+  

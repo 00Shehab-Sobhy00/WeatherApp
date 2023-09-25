@@ -1,0 +1,60 @@
+<div class="login-box">
+  <h2>Sign Up</h2>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <!-- Username -->
+      <label for="name">Username</label>
+      <input formControlName="name" style="color: rgb(0, 0, 0);" id="name" type="text" class="input-control" />
+      <div *ngIf="userName?.touched && userName?.invalid" class="error-message">
+        <div *ngIf="userName!.errors?.required" >Username is required</div>
+        <div *ngIf="userName!.errors?.pattern"  >Username should be a string only</div>
+        <div *ngIf="userName!.errors?.minlength" >
+          Username must be at least {{ userName!.errors?.minlength.requiredLength }} characters
+        </div>
+        <div *ngIf="userName!.errors?.maxlength"  >
+          Username must be at most {{ userName!.errors?.maxlength.requiredLength }} characters
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input formControlName="email" style="color: rgb(0, 0, 0);" type="text" id="email" class="input-control" />
+      <div *ngIf="Email.invalid && (Email.dirty || Email.touched)" class="error-message">
+        <div *ngIf="Email.errors?.required">Email is required</div>
+        <div *ngIf="Email.errors?.email">Invalid email format</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input formControlName="password" style="color: rgb(0, 0, 0);" type="password" id="password" class="input-control" />
+      <div *ngIf="Password.invalid && (Password.dirty || Password.touched)" class="error-message">
+        <div *ngIf="Password.errors?.required">Password is required</div>
+        <div *ngIf="Password.errors?.atLeastOneNumber">Password must contain at least one number</div>
+        <!-- <div *ngIf="Password.errors?.hasCapitalCase">Password must contain at least one capital letter</div>
+        <div *ngIf="Password.errors?.minLength">Password must be at least 8 characters long</div>
+        <div *ngIf="Password.errors?.maxLength">Password must be at most 20 characters long</div>
+        <div *ngIf="Password.errors?.containSpace">Password cannot contain spaces</div> -->
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input formControlName="phone" style="color: rgb(0, 0, 0);" id="phone" type="text" class="input-control"/>
+
+   <div *ngIf="phoneNumber.touched " class="error-message">
+    <div *ngIf="phoneNumber?.errors?.required"> <label >Phone is required </label></div>
+    <div *ngIf="phoneNumber?.touched && phoneNumber?.errors?.pattern">Phone Number must be numbers only</div>
+   </div>
+
+    </div>
+
+    <div class="button-container">
+ 
+      <button id="submit" class="submit-button" routerLink="/login" >Login</button>
+      <button id="submit" class="submit-button " [disabled]="!signupForm.valid">Submit</button>
+    </div>
+  </form>
+</div>

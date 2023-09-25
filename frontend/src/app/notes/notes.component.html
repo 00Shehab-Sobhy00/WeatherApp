@@ -1,0 +1,101 @@
+
+  <ul class="notes" >
+  <h3>Add Notes</h3>
+<li class="list-group-item" style="  padding: 3%;">
+
+<form   #f="ngForm" (ngSubmit)="addNote()">
+  <div class="add-Note">
+   
+     <div class="form-group">
+      <label for="cityName">City Name:</label>
+      <input required pattern="[a-zA-Z ]*" ngModel name="cityName" #cityName="ngModel" type="text"
+       id="cityName" class="form-control" [(ngModel)]="theNote.cityName" />
+       
+       <div class="error-message" *ngIf=" cityName.touched && !cityName.valid"> 
+        <div *ngIf="cityName.errors.required" > city Name shouldnt be empty</div>
+        <div *ngIf="cityName.errors.pattern" > city Name should only strings </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name">Note Details:</label>
+      <input  required minlength="52" ngModel #noteDetails="ngModel" name="noteDetails"  
+      type="text" id="name" class="form-control" [(ngModel)]="theNote.note" />
+      <div class="error-message" *ngIf=" noteDetails.touched && !noteDetails.valid"> 
+        <div *ngIf="noteDetails.errors.required" > city note shouldnt be empty</div>
+        <div *ngIf="noteDetails.errors.minlength" > city note min length is 52 character </div>
+      </div>
+    </div>
+    <button class="btn btn-dark" style="padding-left: 18px; padding-right:18px;" 
+    [disabled]="!f.valid"   (click)="addNote()"  (click)="f.resetForm()" >Add</button>
+    <button  class="btn btn-danger"  (click)="f.resetForm()" >Cancel</button>
+  </div> 
+</form> 
+</li>
+</ul>
+
+<div class=" search-note" *ngIf=" role === 'SUPER_ADMIN' " >
+  <h3  style="margin-top:-10%; padding: 2%; "  >Notes For City  </h3> 
+  <div class="row height d-flex justify-content-center align-items-center" style="margin-top:-2%; width: 135rem;margin-left: -25%; " >
+    <div class="col-md-8">
+      <div class="search">
+        <i class="fa fa-search"></i>
+        <input type="text"  [(ngModel)]="nameOfCity" class="form-control" placeholder="Searching For City Notes">
+        <button *ngIf="!isNotesForCity  " class="btn btn-primary" (click)="getNotesForCity()" (click)=" isNotesForCity = true" >Search</button>
+        <button  *ngIf="isNotesForCity " (click)="getAllSystemNotes()" (click)=" isNotesForCity = false "
+         class="btn btn-info" style="background-color: blue;">Return</button>
+ 
+      </div>
+    </div>
+    
+  </div>
+</div>  
+
+
+
+
+
+  <ul  class="notes"   style=" padding: 3%;">
+    <div>
+      <ul class="list-group" >
+        <li class="list-group-item" *ngFor="let note of notesList; let i = index">
+          <form   #fm="ngForm"  >
+            <div class="form-group">
+                <label for="adminName" >Admin Name:  </label>
+                <input type="text" class="form-control" [(ngModel)]="note.adminName"  name="adminName"[readonly]="true" />
+              </div>
+          <div class="form-group">
+            <label for="cityName">City Name:</label>
+            <input  required pattern="[a-zA-Z ]*" ngModel name="cityName" #cityName="ngModel" 
+             type="text" class="form-control" [(ngModel)]="note.cityName" [readonly]="!isEdit" />
+            <div *ngIf=" cityName.touched && !cityName.valid"> 
+              <div *ngIf="cityName.errors.required" >city Name shouldnt be empty</div>
+              <div *ngIf="cityName.errors.pattern" >city Name should only strings </div>
+          </div>
+          <div class="form-group">
+            <label for="noteDetails">Note Details:</label>
+            <input required minlength="45" maxlength="52" ngModel #noteDetails="ngModel" name="noteDetails"
+             type="text" class="form-control" [(ngModel)]="note.note" />
+             <div class="error-message" *ngIf=" noteDetails.touched && !noteDetails.valid" [readonly]="!isEdit"> 
+              <div *ngIf="noteDetails.errors.required" >  city note shouldnt be empty </div>
+              <div *ngIf="noteDetails.errors.minlength" >city note  min length 45 </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Created On Date: {{ note.date }}</label>
+          </div>
+          <div class="admin-actions">
+            <button class="btn btn-dark" *ngIf="!isEdit" (click)="isEdit = true" >Update</button>
+            <button class="btn btn-success" [disabled]="!f.valid" 
+            *ngIf="isEdit" (ngSubmit)="updateWeatherNote(note.id, note) " >Save</button>
+            <button class="btn btn-danger" *ngIf="!isEdit" (click)="deleteWeatherNote(note.id)">Delete</button>
+            <button  class="btn btn-danger" *ngIf="isEdit" (click)="isEdit = false " >Cancel</button>
+            
+             <hr >
+          </div>
+        </div>
+      </form>
+        </li>
+      </ul>
+    </div>
+  </ul>
+  

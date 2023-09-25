@@ -1,0 +1,140 @@
+ 
+.form-select {
+  width: 80%;
+}
+
+/*  selected All  */
+.list-info {
+  /* font-family: "Montserrat"; */
+  color: #919191;
+  line-height: 1.6;
+  font-weight: 900;
+
+}
+
+h2,
+h3 {
+  color: rgb(0, 0, 0);
+}
+
+.notes {
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  max-width: 900px;
+  margin: 0 auto;
+ margin-bottom: 5%;
+ margin-top: 5%;
+}
+/* 
+.searchBar  {
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  max-width: 900px;
+  margin: 0 auto;
+} */
+
+label {
+  color: black;
+}
+
+.list-group-item {
+  background: linear-gradient(90deg, #f4f4f45e 0%, #243b55 100%);
+  border-radius: 10px;
+
+}
+
+
+.form-control.ng-touched.ng-invalid {
+  border: 2px solid rgb(226, 0, 0);
+}
+
+button {
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-bottom: 10px;
+
+}
+
+
+.error-message {
+  color: rgba(187, 0, 0, 0.377);
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 900;
+}
+ 
+
+
+.search-note {
+  max-width: 900px;
+  margin: auto;
+
+}
+
+ 
+
+ 
+h2,h3 {
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.81);
+}
+
+
+
+
+.search {
+  position: relative;
+  box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+}
+
+.search input {
+
+  height: 60px;
+  text-indent: 25px;
+  border: 2px solid #d6d4d4;
+}
+
+.search input:focus {
+
+  box-shadow: none;
+  border: 2px solid blue;
+}
+
+.search .fa-search {
+  position: absolute;
+  top: 20px;
+  left: 16px;
+}
+
+.search button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 50px;
+  width: 110px;
+  background : #141e30;
+
+}
+
+
+.error-message {
+  color: rgb(98, 0, 0);
+  font-size: 14px;
+  margin-top: 5px;
+}
+ 
+
+
+hr {
+  margin-left: auto;
+  margin-right: auto;
+  border-top-style: dotted;
+  border-color: rgb(255, 255, 255);
+  background-color: aliceblue;
+  border-width: 5px;
+  width: 5%;
+
+
+}

@@ -1,0 +1,58 @@
+<!-- weather-componet.component.html -->
+<div class="container weatherNote">
+  <div  class=" search-bar">
+    <input type="text" style="color: rgba(33, 33, 33, 0.841);" placeholder="Search..." [(ngModel)]="cityName">
+    <button type="button" (click)="getWeatherForCity()">Search</button>
+  </div>
+
+  <div class="weather-data">
+    <p style="font-weight: 900; color: rgb(187, 187, 187); margin-top:10px; margin-bottom: -5px;">Current Weather Condition</p>
+    <div class="location" style="font-weight: 900; color: rgb(19, 77, 164);">{{weatherData.currentWeatherCondition}}
+        <img [src]="weatherData.icon" alt="" /> </div>
+    <div class="temperature" style="color: rgb(19, 77, 164); margin-top: -20px;">{{weatherData.temperature}} °C</div>
+  </div>
+
+  <div *ngIf="!role" class="lower-data">
+    <div class="more-info-label"  style="font-weight: 900; color: rgb(187, 187, 187);">
+      Login to see our Notes about the weather today..!
+    </div>
+    <div class="more-info-container"></div>
+  </div>
+
+  <div *ngIf="role" class="lower-data">
+    <div class="more-info-label">
+      <p style="font-weight: 900; color: rgb(187, 187, 187);">
+        Our Application Notes</p>
+    </div>
+
+    <div id="carouselExample" class="carousel slide" [attr.data-interval]="3000" [attr.data-ride]="true">
+      <div class="carousel-inner">
+        <div  >
+          <div  class="more-info-container">
+            <ul *ngFor="let note of slicedWeatherNotes; let i = index" [class.active]="i === 0">
+              <li class="carousel-item active " style="color: rgba(255, 255, 255, 0.555);">
+                {{ note.note |lineBreakePipe : 20 }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <ol class="carousel-indicators">
+        <li *ngFor="let note of weatherData.weatherNotes; let i = index" [class.active]="i === currentPage"></li>
+      </ol>
+    
+      <button style="color: black;" class="carousel-control-next" type="button" (click)="nextPage()" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    
+      <button style="color: black;" class="carousel-control-prev" type="button" (click)="previousPage()" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <br> <br>
+    </div>  
+
+
+  </div>
+</div>

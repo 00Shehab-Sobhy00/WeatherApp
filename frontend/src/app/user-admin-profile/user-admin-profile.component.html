@@ -1,0 +1,54 @@
+  <ul class="users-admins"  style="  padding: 3%;">
+    <li class="list-group-item" >
+<form #f="ngForm"  (ngSubmit)="updateProfile()"  >
+  
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input  name="email" id ="email"
+    type="text"  class="form-control" [(ngModel)]="user.email"  [readonly]="true"/>
+  </div>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input required  pattern="[a-zA-Z ]*" ngModel  name="name" #name="ngModel" id ="name"
+         type="text"  class="form-control" [(ngModel)]="user.name"  [readonly]="!isEdit" />
+        <div class="error-message" *ngIf="!name.valid"> 
+          <div *ngIf="name.errors.required" > username shouldnt be empty..</div>
+          <div *ngIf="name.errors.pattern" > username dosnt  match the pattern</div>
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <label for="name">Password:</label>
+        <input class="form-control" type="password" required e ngModel name="password" #password="ngModel" id="name"
+        [(ngModel)]="user.password "  [readonly]="!isEdit" />
+      </div>
+      <div class="error-message " *ngIf="!password.valid"> password shouldnt be empty..</div>
+      <div class="form-group">
+     
+        <label for="phone">Phone:</label>
+        <input class="form-control" required  pattern="^(0|[1-9][0-9]*)$"
+         minlength="5" ngModel name="phone" #phone="ngModel" id="phone" 
+        type="text" [(ngModel)]="user.phone" [readonly]="!isEdit" />
+      </div>
+      <div class="error-message " *ngIf="!phone.valid">
+        <div *ngIf="phone.errors.required" > phone shouldnt be empty..</div>
+        <div *ngIf="phone.errors.pattern" > phone should be numbers only </div>
+        <div *ngIf="phone.errors.minlength" > phone minlength 5 numbers</div>
+      </div>
+      <!-- <button *ngIf="isEdit && role == 'USER' " class="btn btn-success"  
+
+       [disabled]="!f.valid"    >update</button> -->
+       <!-- (click)=" isEdit= false " -->
+      <button *ngIf="isEdit " class="btn btn-success" 
+      [disabled]="!f.valid" >update</button>
+      <button *ngIf="!isEdit  " class="btn btn-primary"  (click)="isEdit = true " >Edite</button>
+      <button  class="btn btn-danger"  (click)="isEdit = false " >Cancel</button>
+<!-- <div ></div> -->
+</form>
+    </li>
+  </ul>
+
+
+  <!-- <form #f="ngForm" (ngSubmit)="updateUserProfile(); updateAdminProfile()">
+  
+  </form> -->

@@ -1,0 +1,38 @@
+<nav class="navbar bg-dark navbar-expand-lg" data-bs-theme="#e3f2fd">
+  <div class="container-fluid">
+    <img src="https://static.sketchfab.com/img/press/logos/sketchfab-logo-black.png" alt="Logo" style="margin: 10px; width:40px;">
+    <a class="navbar-brand color-test" routerLink="/">Check Wezo</a>
+
+ 
+  
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav navbar-header">
+        <li class="nav-item" *ngIf=" isAuthenticated  && role !== 'SUPER_ADMIN' ">
+          <a (click)="navigateToUserProfile()" class="nav-link color-test"  >Profile</a>
+        </li>
+     
+        <li class="nav-item" >
+          <a  *ngIf=" isAuthenticated  && role === 'SUPER_ADMIN' " class="nav-link color-test" routerLink = "/admins" > Admins</a>
+        </li>
+        <li class="nav-item" *ngIf="!isAuthenticated">
+          <a class="nav-link color-test" routerLink="/login" >Login</a>
+        </li>
+
+        <li class="nav-item" *ngIf="isAuthenticated &&  role !== 'USER' ">
+          <a class="nav-link color-test" routerLink="/notes" >Notes</a>
+        </li> 
+        
+        <li class="nav-item nav-right" *ngIf="isAuthenticated">
+          <a (click)="authService.logout()" class="nav-link color-test">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+  <router-outlet></router-outlet>  
+

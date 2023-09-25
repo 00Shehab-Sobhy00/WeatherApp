@@ -1,0 +1,130 @@
+ <ul class="admins"  style="  padding: 3%;">
+  <h3>Add Admins</h3>
+  <li class="list-group-item" >
+<form #f="ngForm" (ngSubmit)="addAdmin()">
+<div class="form-group">
+  <label for="email">Email:</label>
+  <input required email ngModel #email=ngModel name="email"  class="form-control" 
+   type="text" id ="email"[(ngModel)]="newAdmin.email" />
+      <div class="error-message" *ngIf=" email.touched && !email.valid"> 
+        <div *ngIf="email.errors.required" > email shouldnt be empty</div>
+        <div *ngIf="email.errors.pattern" > email dosnt match the pattern</div>
+      </div>
+      <!-- <label class="error-message" *ngIf="isExist" > Email already exist </label> -->
+</div>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input required name pattern="[a-zA-Z ]*" ngModel  name="name" #name="ngModel" id ="name"
+       type="text"  class="form-control" [(ngModel)]="newAdmin.name" />
+      <div class="error-message" *ngIf=" name.touched && !name.valid"> 
+        <div *ngIf="name.errors.required" > username shouldnt be empty</div>
+        <div *ngIf="name.errors.pattern" > username dosnt  match the pattern</div>
+      </div>
+    </div>
+  
+    
+    <div class="form-group">
+      <label for="name">Password:</label>
+      <input class="form-control" type="password" required ngModel name="password" #password="ngModel" id="name"
+      [(ngModel)]="newAdmin.password"/>
+    </div>
+    <div class="error-message" *ngIf="password.touched && !password.valid"> password shouldnt be empty</div>
+    <div class="form-group">
+   
+      <label for="phone">Phone:</label>
+      <input  class="form-control" required  pattern="^(0|[1-9][0-9]*)$" minlength="5" ngModel name="phone" #phone="ngModel" 
+      id="phone"  type="text" [(ngModel)]="newAdmin.phone" />
+    </div>
+    <div class="error-message" *ngIf=" phone.touched && !phone.valid">
+      <div *ngIf="phone.errors.required" > phone shouldnt be empty</div>
+      <div *ngIf="phone.errors.pattern" > phone should be numbers only </div>
+      <div *ngIf="phone.errors.minlength" > phone minlength 5 numbers</div>
+    </div>
+         <button class="btn btn-dark" style="padding-left: 18px; padding-right:18px;" 
+         [disabled]="!f.valid"   (click)="addAdmin()"  (click)="f.resetForm()" >Add</button>
+
+    <button  class="btn btn-danger"  (click)="f.resetForm()" >Cancel</button>
+
+</form>
+  </li>
+</ul>
+
+<br><br><br><br><br><br>
+
+<div class=" admins">
+  <h3 style="margin-bottom:11%; margin-left: 10px;">Search For Admin  </h3> 
+  <div class="row height d-flex justify-content-center align-items-center" style="margin-top: -44%; width: 135rem;margin-left: -25%;">
+    <div class="col-md-8">
+      <div class="search">
+        <i class="fa fa-search"></i>
+        <input type="text"  [(ngModel)]="adminName" class="form-control" placeholder="Searching For Admin by name">
+        <button *ngIf="adminName == null || adminName !='' " class="btn btn-primary" (click)="searchAdminByName()" (click)="isAdmin = true" >Search</button>
+        <button  *ngIf="(adminName !== null || adminName =='' )" (click)="getAllAdmins()" (click)="isAdmin = false"
+         class="btn btn-info" style="background-color: blue;">Return</button>
+ 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<ul class="admins"  style="  padding: 3%;">
+   <div style="margin-top: -150px;">
+      <li class="list-group-item adminsList" *ngFor="let admin of allAdmins let i = index">
+        <form   #f="ngForm"  >
+        <div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input  required email ngModel #email=ngModel name="email"
+              type="text" class="form-control" [(ngModel)]="admin.email" />
+              <div class="error-message" *ngIf=" email.touched && !email.valid"> 
+                <div *ngIf="email.errors.required" > email shouldnt be empty</div>
+                <div *ngIf="email.errors.pattern" > email dosnt match the pattern</div>
+              </div>
+              <!-- <label class="error-message" *ngIf="isExist" > Email already exist </label> -->
+          </div>
+  
+          <div class="form-group">
+            <label for="email">Name:</label>
+            <input required name pattern="[a-zA-Z ]*" ngModel  name="name" #name="ngModel" id ="name"
+             type="text" class="form-control" [(ngModel)]="admin.name" [readonly]="!isEdit" />
+             <div class="error-message" *ngIf=" name.touched && !name.valid"> 
+              <div *ngIf="name.errors.required" > username shouldnt be empty</div>
+              <div *ngIf="name.errors.pattern" > username dosnt  match the pattern</div>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="email">Password:</label>
+            <input required ngModel name="password" #password="ngModel"
+             type="password" class="form-control" [(ngModel)]="admin.password" [readonly]="!isEdit" />
+             <div class="error-message" *ngIf="password.touched && !password.valid"> password shouldnt be empty</div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Phone:</label>
+            <input type="phone"  required  pattern="^(0|[1-9][0-9]*)$" minlength="5" ngModel name="phone" #phone="ngModel" 
+             class="form-control" [(ngModel)]="admin.phone" [readonly]="!isEdit" />
+             <div class="error-message" *ngIf=" phone.touched && !phone.valid">
+              <div *ngIf="phone.errors.required" > phone shouldnt be empty</div>
+              <div *ngIf="phone.errors.pattern" > phone should be numbers only </div>
+              <div *ngIf="phone.errors.minlength" > phone minlength 5 numbers</div>
+            </div>
+          </div>
+
+          <div class="admin-actions">
+            <button class="btn btn-success" (ngSubmit)="updateAdmin(admin.adminId , admin)" 
+            (click)="updateAdmin(admin.adminId , admin)" 
+            [disabled]="!f.valid" (click)="isEdit = false"  *ngIf="isEdit" >Update</button>
+            <button  *ngIf="isEdit"  class="btn btn-danger"  (click)="isEdit= false" >Cancel</button>
+            <button *ngIf="!isEdit" class="btn btn-dark"  (click)="isEdit = true " >Edite</button>
+            <button class="btn btn-danger"  *ngIf="!isEdit" (click)="deleteAdmin(admin.adminId)">Delete</button>
+          </div>
+        </div>
+          <hr> 
+        </form>
+    </li>
+    </div>
+</ul> 
+ 
